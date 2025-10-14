@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="no">
     <head>
         <!-- Test -->
@@ -46,164 +47,220 @@
         />
     </head>
     <body style="overscroll-behavior-x: auto">
-        <nav class="navbar navbar-expand-lg bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="https://uka.no/opptak/">
-                    <img
-                        width="200px"
-                        src="https://apps.uka.no/static/images/UKA_datoer_UNO_hvit.png"
-                        alt="UKA logo"
-                    />
-                </a>
-            </div>
-        </nav>
-        <section id="content" class="content-wrapper">
-            <div class="container-fluid px-3">
-                <div class="row mt-4">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10 col-12">
-                        <div id="alert"></div>
+        <div id="root"></div>
 
-                        <h1>Gyldig den 24.10, 25.10, 23.10 for:</h1>
+        <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+            const NAME_MAP = {
+                '873d015a37b10f2be511a38fb52dce0d693359842e72e707e3560d83ec34d85d': {
+                    validDates: '24.10, 25.10, 23.10',
+                    names: [
+                        'Valdemar Rolfsen',
+                        'Nora Knudsen',
+                        'Magnus Lie',
+                        'Caroline Kiær',
+                        'Charlotte Heggem',
+                        'Marit Bjerkreim',
+                    ],
+                },
+            };
 
-                        <h3>Valdemar Rolfsen</h3>
+            const matchRoute = (pathname) => {
+                const segments = pathname.split('/').filter(Boolean);
+                const startIndex = segments.findIndex(
+                    (segment, index) =>
+                        segment === 'innslipp' && segments[index + 1] === 'innslipp'
+                );
 
-                        <h3>Nora Knudsen</h3>
+                if (startIndex === -1) {
+                    return null;
+                }
 
-                        <h3>Magnus Lie</h3>
+                if (segments.length !== startIndex + 5) {
+                    return null;
+                }
 
-                        <h3>Caroline Kiær</h3>
+                const [first, second, id, eventId, action] = segments.slice(
+                    startIndex,
+                    startIndex + 5
+                );
 
-                        <h3>Charlotte Heggem</h3>
+                const isMatch =
+                    first === 'innslipp' &&
+                    second === 'innslipp' &&
+                    eventId === '11498' &&
+                    action === 'list_persons';
 
-                        <h3>Marit Bjerkreim</h3>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-            </div>
+                return isMatch ? { id } : null;
+            };
 
-            <div class="footer-spacer"></div>
-        </section>
+            const Layout = ({ validDates, names }) => (
+                <>
+                    <nav className="navbar navbar-expand-lg bg-primary">
+                        <div className="container-fluid">
+                            <a className="navbar-brand" href="https://uka.no/opptak/">
+                                <img
+                                    style={{ width: '200px' }}
+                                    src="https://apps.uka.no/static/images/UKA_datoer_UNO_hvit.png"
+                                    alt="UKA logo"
+                                />
+                            </a>
+                        </div>
+                    </nav>
+                    <section id="content" className="content-wrapper">
+                        <div className="container-fluid px-3">
+                            <div className="row mt-4">
+                                <div className="col-md-1"></div>
+                                <div className="col-md-10 col-12">
+                                    <div id="alert"></div>
 
-        <footer class="w-100 bg-primary text-secondary position-relative">
-            <div class="container">
-                <div class="row justify-content-center pt-4 pb-2">
-                    <img
-                        class="img-responsive"
-                        style="max-width: 200px; padding-top: 2rem"
-                        alt="logo til UKA"
-                        src="https://apps.uka.no/static/img/footer/uka_logo_footer.svg"
-                    />
-                </div>
-                <div class="row justify-content-center p-5">
-                    <div
-                        class="w-100 d-flex justify-content-center flex-wrap gap-2"
-                        style="gap: 2rem"
-                    >
-                        <a
-                            target="_blank"
-                            href="https://www.facebook.com/ukatrondheim"
-                        >
-                            <img
-                                class="img-responsive"
-                                style="width: 50px"
-                                src="https://apps.uka.no/static/img/footer/facebook.svg"
-                                alt="UKA på Facebook"
-                            />
-                        </a>
-                        <a
-                            target="_blank"
-                            alt="UKA på instagram"
-                            href="https://www.instagram.com/uka_offisiell/"
-                        >
-                            <img
-                                class="img-responsive"
-                                style="width: 50px"
-                                src="https://apps.uka.no/static/img/footer/instagram.svg"
-                                alt="UKA på Instagram"
-                            />
-                        </a>
-                        <a
-                            target="_blank"
-                            href="https://www.linkedin.com/company/uka/"
-                        >
-                            <img
-                                class="img-responsive"
-                                style="width: 50px"
-                                src="https://apps.uka.no/static/img/footer/linkedin.svg"
-                                alt="UKA på LinkedIn"
-                            />
-                        </a>
-                        <a target="_blank" href="">
-                            <img
-                                class="img-responsive"
-                                style="width: 50px"
-                                src="https://apps.uka.no/static/img/footer/Tilgjengelighetsmerket.svg"
-                                alt="Tilgjengelighet i UKA"
-                            />
-                        </a>
-                    </div>
-                </div>
-                <h3 class="text-center font-weight-bold mb-0">Partnere</h3>
-                <div class="row justify-content-center pb-5">
-                    <div
-                        class="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3"
-                    >
-                        <a
-                            class="w-100"
-                            href="https://www.norconsult.no/"
-                            target="_blank"
-                        >
-                            <img
-                                class="w-100"
-                                src="https://apps.uka.no/static/img/footer/sponsor_norconsult.svg"
-                                alt="Norconsult sin logo"
-                            />
-                        </a>
-                    </div>
-                    <div
-                        class="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3"
-                    >
-                        <a href="https://www.sit.no/" target="_blank">
-                            <img
-                                class="w-100"
-                                src="https://apps.uka.no/static/img/footer/sponsor_sit.svg"
-                                alt="SIT sin logo"
-                            />
-                        </a>
-                    </div>
-                    <div
-                        class="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3"
-                    >
-                        <a href="https://www.banenor.no/" target="_blank">
-                            <img
-                                class="w-100"
-                                src="https://apps.uka.no/static/img/footer/sponsor_banenor.svg"
-                                alt="Banenor sin logo"
-                            />
-                        </a>
-                    </div>
-                    <div
-                        class="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3"
-                    >
-                        <a href="https://www.pwc.no/" target="_blank">
-                            <img
-                                class="w-100"
-                                src="https://apps.uka.no/static/img/footer/sponsor_pwc.svg"
-                                alt="PwC sin logo"
-                            />
-                        </a>
-                    </div>
-                </div>
-                <div class="row justify-content-center pb-4">
-                    <div class="col-12 align-self-center text-center">
-                        <p>Org Nr. 985 163 693</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+                                    <h1>Gyldig den {validDates} for:</h1>
 
-        <div id="fb-root"></div>
+                                    {names.map((name) => (
+                                        <h3 key={name}>{name}</h3>
+                                    ))}
+                                </div>
+                                <div className="col-md-1"></div>
+                            </div>
+                        </div>
+
+                        <div className="footer-spacer"></div>
+                    </section>
+
+                    <footer className="w-100 bg-primary text-secondary position-relative">
+                        <div className="container">
+                            <div className="row justify-content-center pt-4 pb-2">
+                                <img
+                                    className="img-responsive"
+                                    style={{ maxWidth: '200px', paddingTop: '2rem' }}
+                                    alt="logo til UKA"
+                                    src="https://apps.uka.no/static/img/footer/uka_logo_footer.svg"
+                                />
+                            </div>
+                            <div className="row justify-content-center p-5">
+                                <div
+                                    className="w-100 d-flex justify-content-center flex-wrap gap-2"
+                                    style={{ gap: '2rem' }}
+                                >
+                                    <a
+                                        target="_blank"
+                                        href="https://www.facebook.com/ukatrondheim"
+                                        rel="noreferrer"
+                                    >
+                                        <img
+                                            className="img-responsive"
+                                            style={{ width: '50px' }}
+                                            src="https://apps.uka.no/static/img/footer/facebook.svg"
+                                            alt="UKA på Facebook"
+                                        />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        href="https://www.instagram.com/uka_offisiell/"
+                                        rel="noreferrer"
+                                    >
+                                        <img
+                                            className="img-responsive"
+                                            style={{ width: '50px' }}
+                                            src="https://apps.uka.no/static/img/footer/instagram.svg"
+                                            alt="UKA på Instagram"
+                                        />
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        href="https://www.linkedin.com/company/uka/"
+                                        rel="noreferrer"
+                                    >
+                                        <img
+                                            className="img-responsive"
+                                            style={{ width: '50px' }}
+                                            src="https://apps.uka.no/static/img/footer/linkedin.svg"
+                                            alt="UKA på LinkedIn"
+                                        />
+                                    </a>
+                                    <a target="_blank" href="" rel="noreferrer">
+                                        <img
+                                            className="img-responsive"
+                                            style={{ width: '50px' }}
+                                            src="https://apps.uka.no/static/img/footer/Tilgjengelighetsmerket.svg"
+                                            alt="Tilgjengelighet i UKA"
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 className="text-center font-weight-bold mb-0">Partnere</h3>
+                            <div className="row justify-content-center pb-5">
+                                <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
+                                    <a className="w-100" href="https://www.norconsult.no/" target="_blank" rel="noreferrer">
+                                        <img
+                                            className="w-100"
+                                            src="https://apps.uka.no/static/img/footer/sponsor_norconsult.svg"
+                                            alt="Norconsult sin logo"
+                                        />
+                                    </a>
+                                </div>
+                                <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
+                                    <a href="https://www.sit.no/" target="_blank" rel="noreferrer">
+                                        <img
+                                            className="w-100"
+                                            src="https://apps.uka.no/static/img/footer/sponsor_sit.svg"
+                                            alt="SIT sin logo"
+                                        />
+                                    </a>
+                                </div>
+                                <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
+                                    <a href="https://www.banenor.no/" target="_blank" rel="noreferrer">
+                                        <img
+                                            className="w-100"
+                                            src="https://apps.uka.no/static/img/footer/sponsor_banenor.svg"
+                                            alt="Banenor sin logo"
+                                        />
+                                    </a>
+                                </div>
+                                <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
+                                    <a href="https://www.pwc.no/" target="_blank" rel="noreferrer">
+                                        <img
+                                            className="w-100"
+                                            src="https://apps.uka.no/static/img/footer/sponsor_pwc.svg"
+                                            alt="PwC sin logo"
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center pb-4">
+                                <div className="col-12 align-self-center text-center">
+                                    <p>Org Nr. 985 163 693</p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+
+                    <div id="fb-root"></div>
+                </>
+            );
+
+            const App = () => {
+                const match = matchRoute(window.location.pathname);
+
+                if (!match) {
+                    return null;
+                }
+
+                const data = NAME_MAP[match.id];
+
+                if (!data) {
+                    return null;
+                }
+
+                return <Layout validDates={data.validDates} names={data.names} />;
+            };
+
+            const rootElement = document.getElementById('root');
+            const root = ReactDOM.createRoot(rootElement);
+            root.render(<App />);
+        </script>
         <script src="https://apps.uka.no/static/cache/js/output.8cdff9b33c4b.js"></script>
     </body>
 </html>
