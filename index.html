@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="no">
     <head>
         <!-- Test -->
@@ -49,29 +49,37 @@
     <body style="overscroll-behavior-x: auto">
         <div id="root"></div>
 
-        <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+        <script
+            src="https://unpkg.com/react@18/umd/react.production.min.js"
+            crossorigin
+        ></script>
+        <script
+            src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+            crossorigin
+        ></script>
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
         <script type="text/babel">
             const NAME_MAP = {
-                '873d015a37b10f2be511a38fb52dce0d693359842e72e707e3560d83ec34d85d': {
-                    validDates: '24.10, 25.10, 23.10',
-                    names: [
-                        'Valdemar Rolfsen',
-                        'Nora Knudsen',
-                        'Magnus Lie',
-                        'Caroline Kiær',
-                        'Charlotte Heggem',
-                        'Marit Bjerkreim',
-                    ],
-                },
+                "873d015a37b10f2be511a38fb52dce0d693359842e72e707e3560d83ec34d85d":
+                    {
+                        validDates: "24.10, 25.10, 23.10",
+                        names: [
+                            "Valdemar Rolfsen",
+                            "Nora Knudsen",
+                            "Magnus Lie",
+                            "Caroline Kiær",
+                            "Charlotte Heggem",
+                            "Marit Bjerkreim",
+                        ],
+                    },
             };
 
             const matchRoute = (pathname) => {
-                const segments = pathname.split('/').filter(Boolean);
+                const segments = pathname.split("/").filter(Boolean);
                 const startIndex = segments.findIndex(
                     (segment, index) =>
-                        segment === 'innslipp' && segments[index + 1] === 'innslipp'
+                        segment === "innslipp" &&
+                        segments[index + 1] === "innslipp",
                 );
 
                 if (startIndex === -1) {
@@ -84,25 +92,38 @@
 
                 const [first, second, id, eventId, action] = segments.slice(
                     startIndex,
-                    startIndex + 5
+                    startIndex + 5,
                 );
 
                 const isMatch =
-                    first === 'innslipp' &&
-                    second === 'innslipp' &&
-                    eventId === '11498' &&
-                    action === 'list_persons';
+                    first === "innslipp" &&
+                    second === "innslipp" &&
+                    eventId === "11498" &&
+                    action === "list_persons";
 
                 return isMatch ? { id } : null;
+            };
+
+            const getPathFromLocation = () => {
+                const hashPath = window.location.hash.replace(/^#/, '');
+
+                if (hashPath) {
+                    return hashPath.startsWith('/') ? hashPath : `/${hashPath}`;
+                }
+
+                return window.location.pathname;
             };
 
             const Layout = ({ validDates, names }) => (
                 <>
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <div className="container-fluid">
-                            <a className="navbar-brand" href="https://uka.no/opptak/">
+                            <a
+                                className="navbar-brand"
+                                href="https://uka.no/opptak/"
+                            >
                                 <img
-                                    style={{ width: '200px' }}
+                                    style={{ width: "200px" }}
                                     src="https://apps.uka.no/static/images/UKA_datoer_UNO_hvit.png"
                                     alt="UKA logo"
                                 />
@@ -134,7 +155,10 @@
                             <div className="row justify-content-center pt-4 pb-2">
                                 <img
                                     className="img-responsive"
-                                    style={{ maxWidth: '200px', paddingTop: '2rem' }}
+                                    style={{
+                                        maxWidth: "200px",
+                                        paddingTop: "2rem",
+                                    }}
                                     alt="logo til UKA"
                                     src="https://apps.uka.no/static/img/footer/uka_logo_footer.svg"
                                 />
@@ -142,7 +166,7 @@
                             <div className="row justify-content-center p-5">
                                 <div
                                     className="w-100 d-flex justify-content-center flex-wrap gap-2"
-                                    style={{ gap: '2rem' }}
+                                    style={{ gap: "2rem" }}
                                 >
                                     <a
                                         target="_blank"
@@ -151,7 +175,7 @@
                                     >
                                         <img
                                             className="img-responsive"
-                                            style={{ width: '50px' }}
+                                            style={{ width: "50px" }}
                                             src="https://apps.uka.no/static/img/footer/facebook.svg"
                                             alt="UKA på Facebook"
                                         />
@@ -163,7 +187,7 @@
                                     >
                                         <img
                                             className="img-responsive"
-                                            style={{ width: '50px' }}
+                                            style={{ width: "50px" }}
                                             src="https://apps.uka.no/static/img/footer/instagram.svg"
                                             alt="UKA på Instagram"
                                         />
@@ -175,7 +199,7 @@
                                     >
                                         <img
                                             className="img-responsive"
-                                            style={{ width: '50px' }}
+                                            style={{ width: "50px" }}
                                             src="https://apps.uka.no/static/img/footer/linkedin.svg"
                                             alt="UKA på LinkedIn"
                                         />
@@ -183,17 +207,24 @@
                                     <a target="_blank" href="" rel="noreferrer">
                                         <img
                                             className="img-responsive"
-                                            style={{ width: '50px' }}
+                                            style={{ width: "50px" }}
                                             src="https://apps.uka.no/static/img/footer/Tilgjengelighetsmerket.svg"
                                             alt="Tilgjengelighet i UKA"
                                         />
                                     </a>
                                 </div>
                             </div>
-                            <h3 className="text-center font-weight-bold mb-0">Partnere</h3>
+                            <h3 className="text-center font-weight-bold mb-0">
+                                Partnere
+                            </h3>
                             <div className="row justify-content-center pb-5">
                                 <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
-                                    <a className="w-100" href="https://www.norconsult.no/" target="_blank" rel="noreferrer">
+                                    <a
+                                        className="w-100"
+                                        href="https://www.norconsult.no/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         <img
                                             className="w-100"
                                             src="https://apps.uka.no/static/img/footer/sponsor_norconsult.svg"
@@ -202,7 +233,11 @@
                                     </a>
                                 </div>
                                 <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
-                                    <a href="https://www.sit.no/" target="_blank" rel="noreferrer">
+                                    <a
+                                        href="https://www.sit.no/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         <img
                                             className="w-100"
                                             src="https://apps.uka.no/static/img/footer/sponsor_sit.svg"
@@ -211,7 +246,11 @@
                                     </a>
                                 </div>
                                 <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
-                                    <a href="https://www.banenor.no/" target="_blank" rel="noreferrer">
+                                    <a
+                                        href="https://www.banenor.no/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         <img
                                             className="w-100"
                                             src="https://apps.uka.no/static/img/footer/sponsor_banenor.svg"
@@ -220,7 +259,11 @@
                                     </a>
                                 </div>
                                 <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
-                                    <a href="https://www.pwc.no/" target="_blank" rel="noreferrer">
+                                    <a
+                                        href="https://www.pwc.no/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         <img
                                             className="w-100"
                                             src="https://apps.uka.no/static/img/footer/sponsor_pwc.svg"
@@ -242,7 +285,16 @@
             );
 
             const App = () => {
-                const match = matchRoute(window.location.pathname);
+                const [currentPath, setCurrentPath] = React.useState(getPathFromLocation());
+
+                React.useEffect(() => {
+                    const handleHashChange = () => setCurrentPath(getPathFromLocation());
+                    window.addEventListener('hashchange', handleHashChange);
+
+                    return () => window.removeEventListener('hashchange', handleHashChange);
+                }, []);
+
+                const match = matchRoute(currentPath);
 
                 if (!match) {
                     return null;
@@ -254,10 +306,12 @@
                     return null;
                 }
 
-                return <Layout validDates={data.validDates} names={data.names} />;
+                return (
+                    <Layout validDates={data.validDates} names={data.names} />
+                );
             };
 
-            const rootElement = document.getElementById('root');
+            const rootElement = document.getElementById("root");
             const root = ReactDOM.createRoot(rootElement);
             root.render(<App />);
         </script>
