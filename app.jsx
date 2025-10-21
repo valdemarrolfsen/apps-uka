@@ -11,7 +11,7 @@ const NAME_MAP = {
     ],
   },
   "873d015a37b10f2ce512a38fb62dcf0d793359842e72e707e3560d83ec34d85d": {
-    validDates: "24.10, 25.10, 23.10",
+    validDates: "24.10, 25.10",
     names: [
       "Erik Havre",
       "Haakon Lyngstad",
@@ -27,7 +27,7 @@ const NAME_MAP = {
     ],
   },
   "873d015a37b10f2ce512a38fb82dcd0d793459842e72e707e3560d83ec34d85d": {
-    validDates: "24.10, 25.10, 23.10",
+    validDates: "24.10, 25.10",
     names: [
       "Bendik Bøe Børve",
       "Sigurd Aasmo Finne",
@@ -43,7 +43,7 @@ const NAME_MAP = {
     ],
   },
   "873d015a37b10f3ce512a38fb62dcf0d793359842e72r715e3560d83ec36d85d": {
-    validDates: "24.10, 25.10, 23.10",
+    validDates: "24.10, 25.10",
     names: [
       "Magnus Noodt",
       "Thomas Torseth",
@@ -59,7 +59,7 @@ const NAME_MAP = {
     ],
   },
   "873d015a37b11f2ce512a38fb62ddf0d794359842e72c707e3560d83ec34d85d": {
-    validDates: "24.10, 25.10, 23.10",
+    validDates: "24.10, 25.10",
     names: [
       "Eirik Rye",
       "Hauk Bjørnland",
@@ -80,7 +80,7 @@ const matchRoute = (pathname) => {
   const segments = pathname.split("/").filter(Boolean);
   const startIndex = segments.findIndex(
     (segment, index) =>
-      segment === "innslipp" && segments[index + 1] === "innslipp"
+      segment === "innslipp" && segments[index + 1] === "innslipp",
   );
 
   if (startIndex === -1) {
@@ -93,7 +93,7 @@ const matchRoute = (pathname) => {
 
   const [first, second, id, eventId, action] = segments.slice(
     startIndex,
-    startIndex + 5
+    startIndex + 5,
   );
 
   const isMatch =
@@ -229,11 +229,7 @@ const Layout = ({ validDates, names }) => (
             </a>
           </div>
           <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
-            <a
-              href="https://www.sit.no/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://www.sit.no/" target="_blank" rel="noreferrer">
               <img
                 className="w-100"
                 src="https://apps.uka.no/static/img/footer/sponsor_sit.svg"
@@ -242,11 +238,7 @@ const Layout = ({ validDates, names }) => (
             </a>
           </div>
           <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
-            <a
-              href="https://www.banenor.no/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://www.banenor.no/" target="_blank" rel="noreferrer">
               <img
                 className="w-100"
                 src="https://apps.uka.no/static/img/footer/sponsor_banenor.svg"
@@ -255,11 +247,7 @@ const Layout = ({ validDates, names }) => (
             </a>
           </div>
           <div className="col-8 col-md-4 col-lg-2 d-flex justify-content-center align-items-end py-3">
-            <a
-              href="https://www.pwc.no/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://www.pwc.no/" target="_blank" rel="noreferrer">
               <img
                 className="w-100"
                 src="https://apps.uka.no/static/img/footer/sponsor_pwc.svg"
@@ -293,12 +281,14 @@ const App = () => {
   const match = matchRoute(currentPath);
 
   if (!match) {
+    window.location.href = "https://www.uka.no/";
     return null;
   }
 
   const data = NAME_MAP[match.id];
 
   if (!data) {
+    window.location.href = "https://www.uka.no/";
     return null;
   }
 
