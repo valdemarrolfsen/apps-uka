@@ -13,7 +13,7 @@ const NAME_MAP = {
   "873d015a37b10f2ce512a38fb62dcf0d793359842e72e707e3560d83ec34d85d": {
     validDates: "24.10, 25.10",
     names: [
-      "Erik Havre",
+      "Eirik Havre",
       "Haakon Lyngstad",
       "Mathis Tolnæs",
       "Nore Rystad",
@@ -32,7 +32,7 @@ const NAME_MAP = {
       "Bendik Bøe Børve",
       "Sigurd Aasmo Finne",
       "Vegard Hatleli",
-      "Henrik Holmbeck",
+      "Henrik Holmbek",
       "Stinius Nielsen",
       "Sondre Nicolai Berntzen Armann",
       "Victor Norris",
@@ -40,6 +40,7 @@ const NAME_MAP = {
       "Viktor Hamza Wiker",
       "Nicolai Paus Reinertsen",
       "Petter Sunde",
+      "Erik Hovden",
     ],
   },
   "873d015a37b10f3ce512a38fb62dcf0d793359842e72r715e3560d83ec36d85d": {
@@ -51,11 +52,12 @@ const NAME_MAP = {
       "Erik Boman",
       "Fredrik Person",
       "Olav Vikane",
-      "Per Eivind Fritzønn",
+      "Per Eivind Fritzon",
       "Sigurd Tøfte Johnsen",
       "Sebastian Johan Varegg",
       "Leo Gjessing",
       "Thomas Vetterhus",
+      "Sverre Guldager",
     ],
   },
   "873d015a37b11f2ce512a38fb62ddf0d794359842e72c707e3560d83ec34d85d": {
